@@ -1,3 +1,14 @@
+import sys
+import os
+
+# Set the working directory to the root of your project folder
+os.chdir('/home/felipe/shooting-roots-python-code-v2')
+
+# Add the Config and Core directories to the Python path
+sys.path.append(os.path.join(os.getcwd(), 'Config'))
+sys.path.append(os.path.join(os.getcwd(), 'Core'))
+
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from numpy import array
@@ -39,7 +50,19 @@ shooting_solution = ShootingSol(dt, dz, array([0, T]), array([0, Z]), tol)
 
 shooting_solution.shooting_method(soil_parameters, active_uptake, uptake_type, bc_type)
 
-plt.contourf(shooting_solution.z_sol, shooting_solution.t_sol, shooting_solution.f_sol)
-plt.xlabel('z (cm)')
-plt.ylabel('t (h)')
+# plt.contourf(shooting_solution.z_sol, shooting_solution.t_sol, shooting_solution.f_sol)
+
+fig1, ax2 = plt.subplots(layout = 'constrained')
+CS = ax2.contourf(shooting_solution.t_sol, shooting_solution.z_sol, np.transpose(shooting_solution.f_sol), cmap=plt.cm.inferno)
+# Make a colorbar for the ContourSet returned by the contourf call.
+cbar = fig1.colorbar(CS)
+
+# plt.contourf(shooting_solution.t_sol, shooting_solution.z_sol, np.transpose(shooting_solution.f_sol))
+
+# plt.xlabel('t (h)')
+# plt.ylabel('z (cm)')
+
+ax2.set_xlabel('t (h)')
+ax2.set_ylabel('z (cm)')
+
 plt.show()
