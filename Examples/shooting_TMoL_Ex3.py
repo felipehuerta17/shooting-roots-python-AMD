@@ -1,14 +1,3 @@
-import sys
-import os
-
-# Set the working directory to the root of your project folder
-os.chdir('/home/felipe/shooting-roots-python-code-v2')
-
-# Add the Config and Core directories to the Python path
-sys.path.append(os.path.join(os.getcwd(), 'Config'))
-sys.path.append(os.path.join(os.getcwd(), 'Core'))
-
-
 import matplotlib.pyplot as plt
 import pandas as pd
 from numpy import array
